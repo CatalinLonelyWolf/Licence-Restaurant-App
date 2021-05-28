@@ -7,6 +7,12 @@ module.exports.get_meals = (req, res) => {
 };
 
 module.exports.post_meal = async (req, res) => {
+  const { title, description, price } = req.body;
+
+  if (!title || !description || !price) {
+    res.status(400).json({ msg: "Please enter all fields" });
+  }
+
   try {
     const newMeal = new Meal(req.body);
     newMeal.save().then((meal) => res.json(meal));

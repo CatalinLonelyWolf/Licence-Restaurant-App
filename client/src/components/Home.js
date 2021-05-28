@@ -35,6 +35,8 @@ class Home extends Component {
   render() {
     const { items } = this.props.item;
     const user = this.props.user;
+
+    /* if (this.props.isAuthenticated && this.props.role === 1) */
     return (
       <div>
         <AppNavbar />
@@ -45,7 +47,7 @@ class Home extends Component {
                 <Card className='mb-4'>
                   <CardBody>
                     <CardTitle tag='h5'>{item.title}</CardTitle>
-                    <CardSubtitle tag='h6'>Rs. {item.price}</CardSubtitle>
+                    <CardSubtitle tag='h6'>RON. {item.price}</CardSubtitle>
                     <CardText>{item.category}</CardText>
                     {this.props.isAuthenticated ? (
                       <Button

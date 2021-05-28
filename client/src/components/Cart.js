@@ -71,7 +71,7 @@ class Cart extends Component {
         this.props.cart.cart ? (
           <Container>
             <div className='row'>
-              {this.props.cart.cart.items.map((item) => (
+              {this.props.cart.cart.meals.map((item) => (
                 <div className='col-md-4'>
                   <Card>
                     <CardBody>

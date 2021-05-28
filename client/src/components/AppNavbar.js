@@ -9,9 +9,7 @@ import {
   Container,
   NavLink,
 } from "reactstrap";
-import RegisterModal from "./auth/registerModal";
 import Logout from "./auth/Logout";
-import LoginModal from "./auth/loginModal";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -40,6 +38,11 @@ class AppNavbar extends Component {
             <strong>{user ? `Welcome ${user.name}` : ""}</strong>
           </span>
         </NavItem>
+        {/* if admin
+          <NavItem>
+          <NavLink href='/addItem'>AddItem</NavLink>
+        </NavItem>
+        */}
         <NavItem>
           <NavLink href='/'>Home</NavLink>
         </NavItem>
@@ -55,13 +58,21 @@ class AppNavbar extends Component {
       </Fragment>
     );
 
+    /*     const adminLinks = (
+      <Fragment>
+        <NavItem>
+          <AddItem />
+        </NavItem>
+      </Fragment>
+    ); */
+
     const guestLinks = (
       <Fragment>
         <NavItem>
-          <RegisterModal />
+          <NavLink href='/register'>Register</NavLink>
         </NavItem>
         <NavItem>
-          <LoginModal />
+          <NavLink href='/login'>Login</NavLink>
         </NavItem>
       </Fragment>
     );
@@ -70,7 +81,7 @@ class AppNavbar extends Component {
       <div>
         <Navbar color='dark' dark expand='sm' className='mb-5'>
           <Container>
-            <NavbarBrand href='/'>E Commerce Store</NavbarBrand>
+            <NavbarBrand href='/'>Food 4 Fun</NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className='ml-auto' navbar>

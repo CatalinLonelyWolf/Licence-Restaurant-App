@@ -11,6 +11,11 @@ module.exports.signup = (req, res) => {
     res.status(400).json({ msg: "Please enter all fields" });
   }
 
+  if (password.length < 8)
+    return res
+      .status(400)
+      .json({ msg: "Password needs to be at least 8 characters long." });
+
   User.findOne({ email }).then((user) => {
     if (user) return res.status(400).json({ msg: "User already exists" });
 
@@ -31,24 +36,29 @@ module.exports.signup = (req, res) => {
       bcrypt.hash(password, salt, (err, hash) => {
         if (err) throw err;
         newUser.password = hash;
-        newUser.save().then((user) => {
-          jwt.sign(
-            { id: user._id },
-            config.get("jwtsecret"),
-            { expiresIn: 3600 },
-            (err, token) => {
-              if (err) throw err;
-              res.json({
-                token,
-                user: {
-                  id: user._id,
-                  name: user.name,
-                  email: user.email,
-                },
-              });
-            }
-          );
-        });
+        newUser
+          .save()
+          .then((user) => {
+            jwt.sign(
+              { id: user._id },
+              config.get("jwtsecret"),
+              { expiresIn: 3600 },
+              (err, token) => {
+                if (err) throw err;
+                res.json({
+                  token,
+                  user: {
+                    id: user._id,
+                    name: user.name,
+                    email: user.email,
+                  },
+                });
+              }
+            );
+          })
+          .catch((err) => {
+            return res.status(400).json({ msg: err.errors.email.message });
+          });
       });
     });
   });

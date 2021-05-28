@@ -41,7 +41,7 @@ class AddItem extends Component {
 
     await this.props.addItem(newItem);
 
-    alert("Item added successfully");
+    alert("Item added successfully if authorized");
   };
 
   render() {
