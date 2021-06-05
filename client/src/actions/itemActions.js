@@ -7,6 +7,7 @@ import {
   ITEMS_LOADING,
 } from "./types";
 import { returnErrors } from "./errorActions";
+import { tokenConfig } from "./authActions";
 
 export const getItems = () => (dispatch) => {
   dispatch(setItemsLoading());
@@ -23,9 +24,9 @@ export const getItems = () => (dispatch) => {
     );
 };
 
-export const addItem = (item) => (dispatch) => {
+export const addItem = (item) => (dispatch, getState) => {
   axios
-    .post("/api/meals", item)
+    .post("/api/meals", item, tokenConfig(getState))
     .then((res) =>
       dispatch({
         type: ADD_ITEM,
@@ -37,9 +38,9 @@ export const addItem = (item) => (dispatch) => {
     );
 };
 
-export const deleteItem = (id) => (dispatch) => {
+export const deleteItem = (id) => (dispatch, getState) => {
   axios
-    .delete(`/api/meals/${id}`)
+    .delete(`/api/meals/${id}`, tokenConfig(getState))
     .then((res) =>
       dispatch({
         type: DELETE_ITEM,
@@ -51,9 +52,9 @@ export const deleteItem = (id) => (dispatch) => {
     );
 };
 
-export const updateItem = (id, item) => (dispatch) => {
+export const updateItem = (id, item) => (dispatch, getState) => {
   axios
-    .put(`/api/meals/${id}`, item)
+    .put(`/api/meals/${id}`, item, tokenConfig(getState))
     .then((res) =>
       dispatch({
         type: UPDATE_ITEM,

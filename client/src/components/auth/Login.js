@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import {
-  Container,
   Button,
+  Container,
+  Row,
+  Card,
+  CardImg,
+  CardBody,
+  CardTitle,
   Form,
   FormGroup,
   Label,
@@ -13,6 +18,9 @@ import PropTypes from "prop-types";
 import { login } from "../../actions/authActions";
 import { clearErrors } from "../../actions/errorActions";
 import { Redirect } from "react-router-dom";
+import AppNavbar from "../AppNavbar";
+import "../../assets/styles/style.css";
+import LoginImg from "../../assets/images/login.jpg";
 
 class Login extends Component {
   state = {
@@ -59,36 +67,78 @@ class Login extends Component {
       return <Redirect to='/' />;
     }
     return (
-      <Container>
-        <h1>Login</h1>
-
-        {this.state.msg ? <Alert color='danger'>{this.state.msg}</Alert> : null}
-        <Form onSubmit={this.onSubmit}>
-          <FormGroup>
-            <Label for='email'>Email</Label>
-            <Input
-              type='email'
-              name='email'
-              id='email'
-              placeholder='Email'
-              className='mb-3'
-              onChange={this.onChange}
-            />
-            <Label for='password'>Password</Label>
-            <Input
-              type='password'
-              name='password'
-              id='password'
-              placeholder='Password'
-              className='mb-3'
-              onChange={this.onChange}
-            />
-            <Button color='dark' style={{ marginTop: "2rem" }} block>
-              Login
-            </Button>
-          </FormGroup>
-        </Form>
-      </Container>
+      <div>
+        <AppNavbar />
+        <div className='register-form py-5'>
+          <Container>
+            <Row>
+              <div className='col-lg-10 col-xl-12 mx-auto'>
+                <Card className='card card-signin flex-row my-5'>
+                  <CardImg
+                    className='card-img-left d-none d-flex flex-row col-xl-6'
+                    src={LoginImg}
+                    alt='Login cooking image'
+                  />
+                  <CardBody className='col-12 col-lg-6 col-xl-6'>
+                    <CardTitle className='card-title text-center'>
+                      <h1>Login</h1>
+                      {this.state.msg ? (
+                        <Alert color='danger'>{this.state.msg}</Alert>
+                      ) : null}
+                    </CardTitle>
+                    <Form onSubmit={this.onSubmit} className='form-signin'>
+                      <FormGroup>
+                        <Label for='email'>Email</Label>
+                        <Input
+                          type='email'
+                          name='email'
+                          id='email'
+                          placeholder='Email'
+                          className='mb-3 form-control'
+                          onChange={this.onChange}
+                        />
+                        <Label for='password'>Password</Label>
+                        <Input
+                          type='password'
+                          name='password'
+                          id='password'
+                          placeholder='Password'
+                          className='mb-3 form-control'
+                          onChange={this.onChange}
+                        />
+                        <Button
+                          className='btn btn-lg btn-primary btn-block text-uppercase'
+                          style={{ marginTop: "2rem" }}
+                          block
+                          type='submit'
+                        >
+                          Login
+                        </Button>
+                        <Button
+                          className='btn btn-lg btn-google btn-block text-uppercase'
+                          style={{ marginTop: "2rem" }}
+                          block
+                          type='submit'
+                        >
+                          Login with Google
+                        </Button>
+                        <Button
+                          className='btn btn-lg btn-facebook btn-block text-uppercase'
+                          style={{ marginTop: "2rem" }}
+                          block
+                          type='submit'
+                        >
+                          Login with Faceboook
+                        </Button>
+                      </FormGroup>
+                    </Form>
+                  </CardBody>
+                </Card>
+              </div>
+            </Row>
+          </Container>
+        </div>
+      </div>
     );
   }
 }

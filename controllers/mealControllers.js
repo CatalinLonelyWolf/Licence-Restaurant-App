@@ -11,13 +11,13 @@ module.exports.post_meal = async (req, res) => {
 
   if (!title || !description || !price) {
     res.status(400).json({ msg: "Please enter all fields" });
-  }
-
-  try {
-    const newMeal = new Meal(req.body);
-    newMeal.save().then((meal) => res.json(meal));
-  } catch (err) {
-    res.json(err);
+  } else {
+    try {
+      const newMeal = new Meal(req.body);
+      newMeal.save().then((meal) => res.json(meal));
+    } catch (err) {
+      res.json(err);
+    }
   }
 };
 

@@ -1,24 +1,29 @@
 import React, { Component } from "react";
 import {
   Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
+  Container,
+  Row,
+  Card,
+  CardImg,
+  CardBody,
+  CardTitle,
   Form,
   FormGroup,
   Label,
   Input,
-  NavLink,
   Alert,
 } from "reactstrap";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { register } from "../../actions/authActions";
 import { clearErrors } from "../../actions/errorActions";
+import { Redirect } from "react-router-dom";
+import AppNavbar from "../AppNavbar";
+import "../../assets/styles/style.css";
+import RegisterImg from "../../assets/images/reg.jpg";
 
 class Register extends Component {
   state = {
-    modal: false,
     name: "",
     email: "",
     password: "",
@@ -33,7 +38,7 @@ class Register extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    const { error, isAuthenticated } = this.props;
+    const { error } = this.props;
     if (error !== prevProps.error) {
       // Check for register error
       if (error.id === "REGISTER_FAIL") {
@@ -42,22 +47,7 @@ class Register extends Component {
         this.setState({ msg: null });
       }
     }
-
-    // If authenticated, close modal
-    /*  if (this.state.modal) {
-      if (isAuthenticated) {
-        this.toggle();
-      }
-    } */
   }
-  /* 
-  toggle = () => {
-    // Clear errors
-    this.props.clearErrors();
-    this.setState({
-      modal: !this.state.modal,
-    });
-  }; */
 
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -76,57 +66,92 @@ class Register extends Component {
   };
 
   render() {
+    // Redirect home if authenticated
+    if (this.props.isAuthenticated) {
+      return <Redirect to='/' />;
+    }
     return (
-      <div className='container'>
-        <Button color='info' className='btn btn-sm'>
-          <NavLink onClick={this.toggle} href='#'>
-            <span className='text-dark'>
-              <b>Register</b>
-            </span>
-          </NavLink>
-        </Button>
-        <Modal isOpen={this.state.modal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>Register</ModalHeader>
-          <ModalBody>
-            {this.state.msg ? (
-              <Alert color='danger'>{this.state.msg}</Alert>
-            ) : null}
-            <Form onSubmit={this.onSubmit}>
-              <FormGroup>
-                <Label for='name'>Name</Label>
-                <Input
-                  type='text'
-                  name='name'
-                  id='name'
-                  placeholder='Name'
-                  className='mb-3'
-                  onChange={this.onChange}
-                />
-                <Label for='email'>Email</Label>
-                <Input
-                  type='email'
-                  name='email'
-                  id='email'
-                  placeholder='Email'
-                  className='mb-3'
-                  onChange={this.onChange}
-                />
-                <Label for='password'>Password</Label>
-                <Input
-                  type='password'
-                  name='password'
-                  id='password'
-                  placeholder='Password'
-                  className='mb-3'
-                  onChange={this.onChange}
-                />
-                <Button color='dark' style={{ marginTop: "2rem" }} block>
-                  Register
-                </Button>
-              </FormGroup>
-            </Form>
-          </ModalBody>
-        </Modal>
+      <div>
+        <AppNavbar />
+        <div className='register-form py-5'>
+          <Container>
+            <Row>
+              <div className='col-lg-10 col-xl-12 mx-auto'>
+                <Card className='card card-signin flex-row my-5'>
+                  <CardImg
+                    className='card-img-left d-none d-flex flex-row col'
+                    src={RegisterImg}
+                    alt='Register cooking image'
+                  />
+                  <CardBody className='col-12 col-lg-6 col-xl-6'>
+                    <CardTitle className='text-center'>
+                      <h1>Register</h1>
+                      {this.state.msg ? (
+                        <Alert color='danger'>{this.state.msg}</Alert>
+                      ) : null}
+                    </CardTitle>
+
+                    <Form onSubmit={this.onSubmit} className='form-signin'>
+                      <FormGroup>
+                        <Label for='name'>Name</Label>
+                        <Input
+                          type='text'
+                          name='name'
+                          id='name'
+                          placeholder='Name'
+                          className='mb-3 form-control'
+                          onChange={this.onChange}
+                        />
+                        <Label for='email'>Email</Label>
+                        <Input
+                          type='email'
+                          name='email'
+                          id='email'
+                          placeholder='Email'
+                          className='mb-3'
+                          onChange={this.onChange}
+                        />
+                        <Label for='password'>Password</Label>
+                        <Input
+                          type='password'
+                          name='password'
+                          id='password'
+                          placeholder='Password'
+                          className='mb-3'
+                          onChange={this.onChange}
+                        />
+                        <Button
+                          className='btn btn-lg btn-primary btn-block text-uppercase'
+                          style={{ marginTop: "2rem" }}
+                          block
+                          type='submit'
+                        >
+                          Register
+                        </Button>
+                        <Button
+                          className='btn btn-lg btn-google btn-block text-uppercase'
+                          style={{ marginTop: "2rem" }}
+                          block
+                        >
+                          <i class='fab fa-google mr-2'></i>
+                          Sign in with Google
+                        </Button>
+                        <Button
+                          className='btn btn-lg btn-facebook btn-block text-uppercase'
+                          style={{ marginTop: "2rem" }}
+                          block
+                        >
+                          <i class='fab fa-facebook-f mr-2'></i>
+                          Sign in with Facebook
+                        </Button>
+                      </FormGroup>
+                    </Form>
+                  </CardBody>
+                </Card>
+              </div>
+            </Row>
+          </Container>
+        </div>
       </div>
     );
   }

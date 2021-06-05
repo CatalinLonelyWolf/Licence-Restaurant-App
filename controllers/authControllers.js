@@ -51,6 +51,7 @@ module.exports.signup = (req, res) => {
                     id: user._id,
                     name: user.name,
                     email: user.email,
+                    role: user.role,
                   },
                 });
               }
@@ -81,7 +82,7 @@ module.exports.login = async (req, res) => {
       jwt.sign(
         { id: user._id },
         config.get("jwtsecret"),
-        { expiresIn: 3600 },
+        { expiresIn: 9999999 },
         (err, token) => {
           if (err) throw err;
           res.json({
