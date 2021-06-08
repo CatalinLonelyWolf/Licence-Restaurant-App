@@ -58,14 +58,14 @@ class MealModal extends Component {
 
       window.setTimeout(() => {
         this.setState({ msg: null });
-      }, 2000);
+      }, 3000);
 
       return;
     }
 
     const { title, description, category, price, image } = this.state;
 
-    const newItem = {
+    let newItem = {
       title,
       description,
       category,
@@ -76,6 +76,7 @@ class MealModal extends Component {
     //TODO: if for add/update
     try {
       await this.props.addItem(newItem);
+      this.clearItem();
       this.toggle();
     } catch (err) {
       this.setState({ msg: err });
@@ -89,11 +90,21 @@ class MealModal extends Component {
     });
   };
 
+  clearItem = () => {
+    this.setState({
+      title: "",
+      description: "",
+      category: "",
+      price: "",
+      image: "",
+    });
+  };
+
   render() {
     return (
       <Fragment>
         <Button color='primary' onClick={this.toggle}>
-          Add Item
+          Add Meal
         </Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader>Add meal</ModalHeader>

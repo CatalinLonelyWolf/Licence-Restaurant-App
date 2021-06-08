@@ -1,16 +1,16 @@
 import React, { Fragment, Component } from "react";
+import { Button } from "reactstrap";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import MealModal from "./menu/mealModal";
+import MealModal from "./mealModal";
 
 class AddItem extends Component {
-  static propTypes = {
-    auth: PropTypes.object.isRequired,
-  };
-
   render() {
     const { user } = this.props.auth;
-    return <Fragment>{user && user.role === 1 ? <MealModal /> : ""}</Fragment>;
+    if (user && user.role === 1) {
+      return <MealModal />;
+    }
+    return null;
   }
 }
 

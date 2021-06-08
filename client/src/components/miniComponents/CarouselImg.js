@@ -23,7 +23,7 @@ import Rest3 from "../../assets/images/rest3.jpg";
 export default Carousel; */
 class CarouselImg extends Component {
   render() {
-    return [
+    return (
       <Carousel fade>
         <Carousel.Item>
           <img className='d-block w-100' src={Rest1} alt='First slide' />
@@ -50,8 +50,8 @@ class CarouselImg extends Component {
             </p>
           </Carousel.Caption>
         </Carousel.Item>
-      </Carousel>,
-    ];
+      </Carousel>
+    );
   }
 }
 

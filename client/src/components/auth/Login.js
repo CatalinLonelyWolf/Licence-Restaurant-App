@@ -62,6 +62,10 @@ class Login extends Component {
     this.props.login(user);
   };
 
+  onLogin = (e) => {
+    e.preventDefault();
+  };
+
   render() {
     if (this.props.isAuthenticated) {
       return <Redirect to='/' />;
@@ -118,7 +122,7 @@ class Login extends Component {
                           className='btn btn-lg btn-google btn-block text-uppercase'
                           style={{ marginTop: "2rem" }}
                           block
-                          type='submit'
+                          onClick={this.onLogin}
                         >
                           Login with Google
                         </Button>
@@ -126,7 +130,7 @@ class Login extends Component {
                           className='btn btn-lg btn-facebook btn-block text-uppercase'
                           style={{ marginTop: "2rem" }}
                           block
-                          type='submit'
+                          onClick={this.onLogin}
                         >
                           Login with Faceboook
                         </Button>

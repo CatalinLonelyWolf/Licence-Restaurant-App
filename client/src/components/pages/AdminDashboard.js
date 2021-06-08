@@ -13,13 +13,15 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getItems, deleteItem, updateItem } from "../../actions/itemActions";
 import { addToCart } from "../../actions/cartActions";
-import AddItem from "../AddItem";
+import AddItem from "../menu/AddItem";
 import "../../assets/styles/style.css";
 
 class AdminDashboard extends Component {
   state = {
     msg: null,
+    admin: false,
   };
+
   componentDidMount() {
     this.props.getItems();
   }
@@ -29,7 +31,6 @@ class AdminDashboard extends Component {
     item: PropTypes.object.isRequired,
     isAuthenticated: PropTypes.bool,
     addToCart: PropTypes.func.isRequired,
-    user: PropTypes.object.isRequired,
     deleteItem: PropTypes.func.isRequired,
   };
 
@@ -43,6 +44,9 @@ class AdminDashboard extends Component {
   };
 
   onEditItem = async (id, item) => {
+    // pass item props to modal
+    // open modal with fields completed
+    // modal must have confirm edit button then
     try {
       await this.props.updateItem(id, item);
       this.setState({ msg: "Item updated" });
@@ -55,6 +59,7 @@ class AdminDashboard extends Component {
     try {
       await this.props.deleteItem(id, productId);
       this.setState({ msg: "Item deleted" });
+      setTimeout(() => this.setState({ msg: "" }), 3000);
     } catch (err) {
       this.setState({ msg: err });
     }
@@ -62,15 +67,16 @@ class AdminDashboard extends Component {
   render() {
     const { items } = this.props.item;
     const { isAuthenticated, user } = this.props.auth;
-    return [
+    return (
       <Container>
         {this.state.msg ? (
           <Alert color='warning'>{this.state.msg}</Alert>
         ) : null}
         <AddItem />
+        {/*<Menu />*/}
         <div className='row'>
           {items.map((item) => (
-            <div className='col-md-4'>
+            <div className='col-md-4' key={item._id}>
               <Card className='mb-4'>
                 <CardBody>
                   <CardTitle tag='h4'>{item.title}</CardTitle>
@@ -116,8 +122,8 @@ class AdminDashboard extends Component {
             </div>
           ))}
         </div>
-      </Container>,
-    ];
+      </Container>
+    );
   }
 }
 

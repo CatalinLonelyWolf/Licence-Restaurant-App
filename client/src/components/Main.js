@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import AddItem from "./AddItem";
 import Home from "./Home";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -19,9 +18,6 @@ class Main extends Component {
       <Switch>
         <Route path='/home'>
           <Home />
-        </Route>
-        <Route path='/addItem'>
-          <AddItem />
         </Route>
         <Route path='/cart'>
           <Cart />
