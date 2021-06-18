@@ -6,6 +6,7 @@ import {
   UPDATE_ITEM,
   ITEMS_LOADING,
 } from "./types";
+
 import { returnErrors } from "./errorActions";
 import { tokenConfig } from "./authActions";
 
@@ -58,7 +59,7 @@ export const updateItem = (id, item) => (dispatch, getState) => {
     .then((res) =>
       dispatch({
         type: UPDATE_ITEM,
-        payload: Promise.all([id, res.data]),
+        payload: { id: id, data: res.data },
       })
     )
     .catch((err) =>

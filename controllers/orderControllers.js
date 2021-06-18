@@ -1,8 +1,7 @@
 const Order = require("../models/Order");
 const Cart = require("../models/Cart");
 const User = require("../models/User");
-const config = require("config");
-const stripe = require("stripe")(config.get("StripeAPIKey"));
+const stripe = require("stripe")(process.env.STRIPE_API_KEY);
 
 module.exports.get_orders = async (req, res) => {
   const userId = req.params.id;
@@ -23,7 +22,7 @@ module.exports.checkout = async (req, res) => {
     let cart = await Cart.findOne({ userId });
     let user = await User.findOne({ _id: userId });
     const email = user.email;
-    const deliveryFee = config.deliveryFee;
+    const deliveryFee = process.env.DELIVERY_FEE;
     if (cart) {
       if (takeaway) cart.order_total += deliveryFee;
       const charge = await stripe.charges.create({

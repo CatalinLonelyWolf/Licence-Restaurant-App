@@ -7,9 +7,4 @@ router.post("/register", authController.signup);
 router.post("/login", authController.login);
 router.get("/user", auth, authController.get_user);
 
-/* router
-  .route()
-  .get(productCtrl.getProducts)
-  .post("/products", authAdmin, productCtrl.createProduct); */
-
 module.exports = router;

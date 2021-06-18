@@ -1,0 +1,23 @@
+.salon {
+  background-image: url(http://localhost:3000/images/wedding.jpg);
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+}
+
+.packets {
+  background-image: url(http://localhost:3000/images/wedd.jpg);
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  font-size: large;
+}
+
+.packets a:hover {
+  color: white;
+  background-color: red;
+}

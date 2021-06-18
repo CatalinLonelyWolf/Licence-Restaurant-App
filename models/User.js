@@ -28,7 +28,7 @@ const UserSchema = new Schema({
   },
   role: {
     type: Number,
-    default: 0, //0 = normal user; 1=admin user
+    default: 0, //0 = normal user; 1 = admin user
   },
 });
 

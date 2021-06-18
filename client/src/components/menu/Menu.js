@@ -1,6 +1,4 @@
 import React, { Fragment, Component } from "react";
-import AppNavbar from "../AppNavbar";
-import "../../assets/styles/style.css";
 
 class Menu extends Component {
   render() {
@@ -48,7 +46,7 @@ class Menu extends Component {
                       </Button>
                     )
                   ) : (
-                    ""
+                    null
                   )}
                 </CardBody>
               </Card>

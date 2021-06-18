@@ -3,6 +3,7 @@ body,
 header,
 #intro {
   height: 100vh;
+  margin: 0;
 }
 
 body {
@@ -444,11 +445,6 @@ img {
   line-height: 60px;
 }
 
-/**********CONTACT FORM************/
-.contact-box {
-  padding: 70px 0px;
-}
-
 /***** Footer *****/
 
 footer {
@@ -494,6 +490,10 @@ footer {
   /* padding: -2px; */
   /* border-radius: 25% 50%; */
   box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+}
+
+.subscribe-form input:active {
+  border: none;
 }
 
 /* Set the size of the div element that contains the map */

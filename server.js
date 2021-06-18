@@ -3,7 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const path = require("path");
-const config = require("config");
+require('dotenv').config();
 
 const authRoutes = require("./routes/auth");
 const mealRoutes = require("./routes/meal");
@@ -31,8 +31,9 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
+
 /* Conexiunea la baza de date */
-const dbURI = config.dbURI;
+const dbURI = process.env.DB_URI;
 const port = process.env.PORT || 4000;
 
 mongoose

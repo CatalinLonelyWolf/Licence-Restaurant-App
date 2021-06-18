@@ -13,12 +13,12 @@ import {
 } from "reactstrap";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { addItem, updateItem } from "../../actions/itemActions";
+
+import { getItems, addItem, updateItem } from "../../actions/itemActions";
 import { clearErrors } from "../../actions/errorActions";
 
 class MealModal extends Component {
   state = {
-    modal: false,
     title: "",
     description: "",
     category: "",
@@ -28,9 +28,18 @@ class MealModal extends Component {
   };
 
   static propTypes = {
+    getItems: PropTypes.func.isRequired,
+    item: PropTypes.object.isRequired,
     error: PropTypes.object.isRequired,
     clearErrors: PropTypes.func.isRequired,
   };
+
+  componentDidMount() {
+    const { data } = this.props;
+    if (data) {
+      this.setItem(data);
+    }
+  }
 
   componentDidUpdate(prevProps) {
     const { error } = this.props;
@@ -53,10 +62,10 @@ class MealModal extends Component {
 
     if (!this.state.title || !this.state.description || !this.state.price) {
       this.setState({
-        msg: "Please enter required fields (title, description, price).",
+        msg: "Please fill in all required fields.",
       });
 
-      window.setTimeout(() => {
+      setTimeout(() => {
         this.setState({ msg: null });
       }, 3000);
 
@@ -64,6 +73,7 @@ class MealModal extends Component {
     }
 
     const { title, description, category, price, image } = this.state;
+    const { type } = this.props;
 
     let newItem = {
       title,
@@ -73,41 +83,70 @@ class MealModal extends Component {
       image,
     };
 
-    //TODO: if for add/update
-    try {
-      await this.props.addItem(newItem);
-      this.clearItem();
-      this.toggle();
-    } catch (err) {
-      this.setState({ msg: err });
+    if (type === "add") {
+      try {
+        await this.props.addItem(newItem);
+        this.setState({ msg: "Item added" });
+        this.setItem({});
+        setTimeout(() => {
+          this.toggle();
+          this.setState({ msg: "" });
+        }, 3000);
+      } catch (err) {
+        this.setState({ msg: err });
+      }
+    } else if (type === "edit") {
+      const { _id } = this.props.data;
+      try {
+        await this.props.updateItem(_id, newItem);
+        this.setState({ msg: "Item updated" });
+        setTimeout(() => {
+          this.toggle();
+          this.setState({ msg: "" });
+        }, 3000);
+      } catch (err) {
+        this.setState({ msg: err });
+      }
     }
   };
 
   toggle = () => {
     this.props.clearErrors();
+    this.props.onToggleModal();
+  };
+
+  setItem = (item) => {
+    const { title, description, category, price, image } = item;
     this.setState({
-      modal: !this.state.modal,
+      title: title,
+      description: description,
+      category: category,
+      price: price,
+      image: image,
     });
   };
 
-  clearItem = () => {
-    this.setState({
-      title: "",
-      description: "",
-      category: "",
-      price: "",
-      image: "",
-    });
+  capitalize = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
   render() {
+    const closeBtn = (
+      <Button className='close' onClick={this.toggle}>
+        &times;
+      </Button>
+    );
+
     return (
       <Fragment>
-        <Button color='primary' onClick={this.toggle}>
-          Add Meal
-        </Button>
-        <Modal isOpen={this.state.modal} toggle={this.toggle}>
-          <ModalHeader>Add meal</ModalHeader>
+        <Modal
+          isOpen={this.props.show}
+          toggle={this.toggle}
+          returnFocusAfterClose={false}
+        >
+          <ModalHeader close={closeBtn}>
+            {this.capitalize(this.props.type)} meal
+          </ModalHeader>
           <ModalBody>
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
@@ -117,15 +156,17 @@ class MealModal extends Component {
                   name='title'
                   id='title'
                   placeholder='Title of the item'
+                  value={this.state.title || ""}
                   onChange={this.onChange}
                 />
                 <br />
                 <Label for='description'>Description</Label>
                 <Input
-                  type='text'
+                  type='textarea'
                   name='description'
                   id='description'
                   placeholder='Description of the item'
+                  value={this.state.description || ""}
                   onChange={this.onChange}
                 />
                 <br />
@@ -135,6 +176,7 @@ class MealModal extends Component {
                   name='category'
                   id='category'
                   placeholder='Category of the item'
+                  value={this.state.category || ""}
                   onChange={this.onChange}
                 ></Input>
                 <br />
@@ -144,6 +186,7 @@ class MealModal extends Component {
                   name='price'
                   id='price'
                   placeholder='Price of the item'
+                  value={this.state.price || ""}
                   onChange={this.onChange}
                 />
                 <br />
@@ -153,6 +196,7 @@ class MealModal extends Component {
                   name='image'
                   id='image'
                   placeholder='Image of the item'
+                  value={this.state.image || ""}
                   onChange={this.onChange}
                 />
                 <br />
@@ -160,7 +204,7 @@ class MealModal extends Component {
                   <Alert color='danger'>{this.state.msg}</Alert>
                 ) : null}
                 <Button color='dark' style={{ marginTop: "2rem" }} block>
-                  Add Item
+                  {this.capitalize(this.props.type)} Item
                 </Button>
               </FormGroup>
             </Form>
@@ -182,6 +226,9 @@ const mapStateToProps = (state) => ({
   error: state.error,
 });
 
-export default connect(mapStateToProps, { clearErrors, addItem, updateItem })(
-  MealModal
-);
+export default connect(mapStateToProps, {
+  getItems,
+  clearErrors,
+  addItem,
+  updateItem,
+})(MealModal);

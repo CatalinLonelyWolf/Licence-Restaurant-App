@@ -15,11 +15,11 @@ import {
 } from "reactstrap";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { Redirect } from "react-router-dom";
+
 import { login } from "../../actions/authActions";
 import { clearErrors } from "../../actions/errorActions";
-import { Redirect } from "react-router-dom";
-import AppNavbar from "../AppNavbar";
-import "../../assets/styles/style.css";
+
 import LoginImg from "../../assets/images/login.jpg";
 
 class Login extends Component {
@@ -72,14 +72,13 @@ class Login extends Component {
     }
     return (
       <div>
-        <AppNavbar />
         <div className='register-form py-5'>
           <Container>
             <Row>
               <div className='col-lg-10 col-xl-12 mx-auto'>
                 <Card className='card card-signin flex-row my-5'>
                   <CardImg
-                    className='card-img-left d-none d-flex flex-row col-xl-6'
+                    className='card-img-left d-none d-flex flex-row col'
                     src={LoginImg}
                     alt='Login cooking image'
                   />

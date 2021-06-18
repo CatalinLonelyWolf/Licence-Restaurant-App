@@ -8,18 +8,20 @@ import {
   Button,
   Container,
   Alert,
+  CardImg,
 } from "reactstrap";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getItems, deleteItem, updateItem } from "../../actions/itemActions";
+
+import { getItems, deleteItem } from "../../actions/itemActions";
 import { addToCart } from "../../actions/cartActions";
+
 import AddItem from "../menu/AddItem";
-import "../../assets/styles/style.css";
+import EditItem from "../menu/EditItem";
 
 class AdminDashboard extends Component {
   state = {
     msg: null,
-    admin: false,
   };
 
   componentDidMount() {
@@ -29,7 +31,7 @@ class AdminDashboard extends Component {
   static propTypes = {
     getItems: PropTypes.func.isRequired,
     item: PropTypes.object.isRequired,
-    isAuthenticated: PropTypes.bool,
+    auth: PropTypes.object.isRequired,
     addToCart: PropTypes.func.isRequired,
     deleteItem: PropTypes.func.isRequired,
   };
@@ -38,18 +40,7 @@ class AdminDashboard extends Component {
     try {
       await this.props.addToCart(id, productId, 1);
       this.setState({ msg: "Item added to cart" });
-    } catch (err) {
-      this.setState({ msg: err });
-    }
-  };
-
-  onEditItem = async (id, item) => {
-    // pass item props to modal
-    // open modal with fields completed
-    // modal must have confirm edit button then
-    try {
-      await this.props.updateItem(id, item);
-      this.setState({ msg: "Item updated" });
+      setTimeout(() => this.setState({ msg: "" }), 3000);
     } catch (err) {
       this.setState({ msg: err });
     }
@@ -64,8 +55,17 @@ class AdminDashboard extends Component {
       this.setState({ msg: err });
     }
   };
+
+  shortenString = (string, size) => {
+    return string
+      ? string.length > size
+        ? string.substring(0, size) + "..."
+        : string
+      : null;
+  };
+
   render() {
-    const { items } = this.props.item;
+    const { items, loading } = this.props.item;
     const { isAuthenticated, user } = this.props.auth;
     return (
       <Container>
@@ -73,55 +73,63 @@ class AdminDashboard extends Component {
           <Alert color='warning'>{this.state.msg}</Alert>
         ) : null}
         <AddItem />
-        {/*<Menu />*/}
-        <div className='row'>
-          {items.map((item) => (
-            <div className='col-md-4' key={item._id}>
-              <Card className='mb-4'>
-                <CardBody>
-                  <CardTitle tag='h4'>{item.title}</CardTitle>
-                  <CardSubtitle tag='h5'>{item.category}</CardSubtitle>
-                  <CardSubtitle tag='h6'>RON. {item.price}</CardSubtitle>
-                  <CardText>{item.description}</CardText>
-                  {user && isAuthenticated ? (
-                    user.role === 1 ? (
-                      <Fragment>
+        {loading ? (
+          <Alert color='warning'>Loading...</Alert>
+        ) : items ? (
+          <div className='row'>
+            {items.map((item) => (
+              <div className='col-md-4' key={item._id}>
+                <Card className='mb-4'>
+                  <CardImg
+                    top
+                    width='100%'
+                    src={item.image}
+                    alt='Card image caption'
+                  />
+                  <CardBody>
+                    <CardTitle tag='h4'>
+                      {this.shortenString(item.title, 30)}
+                    </CardTitle>
+                    <CardSubtitle tag='h5'>{item.category}</CardSubtitle>
+                    <CardTitle tag='h6'>RON. {item.price}</CardTitle>
+
+                    <CardText>
+                      {this.shortenString(item.description, 100)}
+                    </CardText>
+                    {user && isAuthenticated ? (
+                      user.role === 1 ? (
+                        <Fragment>
+                          <EditItem data={item} />
+                          <Button
+                            color='danger'
+                            size='sm'
+                            onClick={this.onDeleteItem.bind(this, item._id)}
+                          >
+                            Delete
+                          </Button>
+                        </Fragment>
+                      ) : (
                         <Button
-                          color='warning'
+                          color='success'
                           size='sm'
-                          onClick={this.onEditItem.bind(this, item)}
+                          onClick={this.onAddToCart.bind(
+                            this,
+                            user._id,
+                            item._id
+                          )}
                         >
-                          Edit
+                          Add To Cart
                         </Button>
-                        <Button
-                          color='danger'
-                          size='sm'
-                          onClick={this.onDeleteItem.bind(this, item._id)}
-                        >
-                          Delete
-                        </Button>
-                      </Fragment>
-                    ) : (
-                      <Button
-                        color='success'
-                        size='sm'
-                        onClick={this.onAddToCart.bind(
-                          this,
-                          user._id,
-                          item._id
-                        )}
-                      >
-                        Add To Cart
-                      </Button>
-                    )
-                  ) : (
-                    ""
-                  )}
-                </CardBody>
-              </Card>
-            </div>
-          ))}
-        </div>
+                      )
+                    ) : null}
+                  </CardBody>
+                </Card>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <Alert color='warning'>No meals found.</Alert>
+        )}
       </Container>
     );
   }
@@ -130,6 +138,7 @@ class AdminDashboard extends Component {
 const mapStateToProps = (state) => ({
   item: state.item,
   auth: state.auth,
+  error: state.error,
 });
 
 export default connect(mapStateToProps, { getItems, addToCart, deleteItem })(

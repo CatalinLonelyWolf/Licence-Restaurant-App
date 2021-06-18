@@ -15,11 +15,11 @@ import {
 } from "reactstrap";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { Redirect } from "react-router-dom";
+
 import { register } from "../../actions/authActions";
 import { clearErrors } from "../../actions/errorActions";
-import { Redirect } from "react-router-dom";
-import AppNavbar from "../AppNavbar";
-import "../../assets/styles/style.css";
+
 import RegisterImg from "../../assets/images/reg.jpg";
 
 class Register extends Component {
@@ -72,7 +72,6 @@ class Register extends Component {
     }
     return (
       <div>
-        <AppNavbar />
         <div className='register-form py-5'>
           <Container>
             <Row>
@@ -133,7 +132,7 @@ class Register extends Component {
                           style={{ marginTop: "2rem" }}
                           block
                         >
-                          <i class='fab fa-google mr-2'></i>
+                          <i className='fab fa-google mr-2'></i>
                           Sign in with Google
                         </Button>
                         <Button
@@ -141,7 +140,7 @@ class Register extends Component {
                           style={{ marginTop: "2rem" }}
                           block
                         >
-                          <i class='fab fa-facebook-f mr-2'></i>
+                          <i className='fab fa-facebook-f mr-2'></i>
                           Sign in with Facebook
                         </Button>
                       </FormGroup>

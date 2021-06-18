@@ -1,10 +1,10 @@
-import React from "react";
+import React, {Fragment} from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 
 ReactDOM.render(
-  <React.Fragment>
+  <Fragment>
     <App />
-  </React.Fragment>,
+  </Fragment>,
   document.getElementById("root")
 );

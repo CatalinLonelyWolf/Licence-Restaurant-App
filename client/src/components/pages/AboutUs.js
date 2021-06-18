@@ -1,18 +1,20 @@
 import React, { Component } from "react";
 import { Container } from "reactstrap";
-import AppNavbar from "../AppNavbar";
-import GalleryView from "../miniComponents/gallery/GalleryView";
-import "../../assets/styles/style.css";
+
+import GalleryView from "../gallery/GalleryView";
+import InfoRest from "../info/InfoRest";
+import Banner from "../bannerQT/Banner";
 
 class AboutUs extends Component {
   render() {
-    return [
-      <AppNavbar />,
+    return (
       <Container>
         <h1>About Us</h1>
+        <InfoRest />
+        <Banner />
         <GalleryView />
-      </Container>,
-    ];
+      </Container>
+    );
   }
 }
 
