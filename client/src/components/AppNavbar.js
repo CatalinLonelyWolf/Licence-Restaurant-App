@@ -39,7 +39,7 @@ class AppNavbar extends Component {
     const messageLink = isAuthenticated ? (
       <NavItem>
         <span className='navbar-text mr-3'>
-          <strong>{user ? `Welcome ${user.name}` : null}</strong>
+          <strong>{user ? `Bine ai venit ${user.name}` : null}</strong>
         </span>
       </NavItem>
     ) : null;
@@ -48,12 +48,12 @@ class AppNavbar extends Component {
       <Fragment>
         <NavItem>
           <NavLink tag={RRNavLink} exact to='/cart'>
-            Cart
+            Cos
           </NavLink>
         </NavItem>
         <NavItem>
           <NavLink tag={RRNavLink} exact to='/orders' className='mr-2'>
-            Orders
+            Istoric
           </NavLink>
         </NavItem>
         <NavItem>
@@ -96,22 +96,27 @@ class AppNavbar extends Component {
               {messageLink}
               <NavItem>
                 <NavLink tag={RRNavLink} exact to='/'>
-                  Home
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={RRNavLink} exact to='events'>
-                  Events
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={RRNavLink} exact to='reservation'>
-                  Reservation
+                  Acasa
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink tag={RRNavLink} exact to='about-us'>
-                  About Us
+                  Despre noi
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink tag={RRNavLink} exact to='events'>
+                  Evenimente
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink tag={RRNavLink} exact to='menu'>
+                  Meniu
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink tag={RRNavLink} exact to='reservation'>
+                  Rezervari
                 </NavLink>
               </NavItem>
               <NavItem>
@@ -119,6 +124,7 @@ class AppNavbar extends Component {
                   Contact
                 </NavLink>
               </NavItem>
+
               {authLinks}
             </Nav>
           </Collapse>

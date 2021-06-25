@@ -150,52 +150,52 @@ class MealModal extends Component {
           <ModalBody>
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
-                <Label for='title'>Title</Label>
+                <Label for='title'>Titlu</Label>
                 <Input
                   type='text'
                   name='title'
                   id='title'
-                  placeholder='Title of the item'
+                  placeholder='Denumirea produsului'
                   value={this.state.title || ""}
                   onChange={this.onChange}
                 />
                 <br />
-                <Label for='description'>Description</Label>
+                <Label for='description'>Descriere</Label>
                 <Input
                   type='textarea'
                   name='description'
                   id='description'
-                  placeholder='Description of the item'
+                  placeholder='Descrierea produsului'
                   value={this.state.description || ""}
                   onChange={this.onChange}
                 />
                 <br />
-                <Label for='category'>Category</Label>
+                <Label for='category'>Categoria</Label>
                 <Input
                   type='text'
                   name='category'
                   id='category'
-                  placeholder='Category of the item'
+                  placeholder='Categoria produsului'
                   value={this.state.category || ""}
                   onChange={this.onChange}
                 ></Input>
                 <br />
-                <Label for='price'>Price</Label>
+                <Label for='price'>Pretul</Label>
                 <Input
                   type='number'
                   name='price'
                   id='price'
-                  placeholder='Price of the item'
+                  placeholder='Pretul produsului'
                   value={this.state.price || ""}
                   onChange={this.onChange}
                 />
                 <br />
-                <Label for='image'>Image</Label>
+                <Label for='image'>Imaginea</Label>
                 <Input
                   type='text'
                   name='image'
                   id='image'
-                  placeholder='Image of the item'
+                  placeholder='Imaginea produsului'
                   value={this.state.image || ""}
                   onChange={this.onChange}
                 />

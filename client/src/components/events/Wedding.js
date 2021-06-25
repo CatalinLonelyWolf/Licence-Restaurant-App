@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col, Button } from "reactstrap";
 import WeddingImg from "../../assets/images/wedding.jpg";
 
 import "./style.css";
@@ -8,7 +8,7 @@ class Wedding extends Component {
   render() {
     return (
       <Fragment>
-        <div className='salon'>
+        <Container>
           <h2>Avantajele Saloanelor noastre</h2>
           <ul className='list-unstyled'>
             <li>Fara taxe ascunse</li>
@@ -21,38 +21,26 @@ class Wedding extends Component {
             <li>Degustare gratuita</li>
             <li>Servicii wedding planner​</li>
           </ul>
-        </div>
+        </Container>
 
         <Container>
           <Row className='align-items-center'>
-            <Col className='col-lg-6 mt-5'>
+            <Col className='col-lg-6'>
               <div id='headingGroup' className='text-center d-none d-lg-block'>
                 <h2> De ce sa vii la noi pentru nunta?</h2>
                 <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. A
-                  minima fugit illum rerum corrupti ut fuga totam nisi eius
-                  itaque, quis non consequuntur nobis facilis odio ducimus, unde
-                  quam? Non? Dicta vitae recusandae excepturi quia nisi a quos
-                  blanditiis. Ratione, ab error, voluptatibus expedita quibusdam
-                  doloremque asperiores consectetur tempore qui, ex nihil eius
-                  facilis beatae aut rem accusantium incidunt in! Dignissimos
-                  voluptate qui, excepturi laboriosam voluptates illum deleniti,
-                  dolorum aperiam eius a voluptatem nostrum aut deserunt
-                  consequatur ducimus temporibus minus dolor eaque consectetur
-                  iste sed dicta vero dolore! Iusto, qui! Veniam, repudiandae
-                  neque expedita debitis facere sapiente. Inventore, cum
-                  tenetur. Accusamus aperiam cupiditate, exercitationem iusto
-                  non, vitae tempora ut consectetur vero a laudantium qui
-                  aliquam necessitatibus, unde iure similique rem. Quis eos id
-                  doloribus voluptatum autem tenetur voluptatem repellat ut rem
-                  corporis! Illum corrupti cum assumenda fugiat autem, ullam
-                  commodi eveniet laboriosam, quas possimus accusantium ipsa
-                  corporis, exercitationem sint molestiae!
+                  Dacă ești în căutarea unui meniu de nuntă în București, la un
+                  restaurant de lux, într-un salon spectaculos, cu mâncare
+                  delicioasă, ai găsit locul perfect! Restaurant Food4Fun din
+                  sector 4, București, îți oferă aranjamente așa cum îți
+                  dorești, cu flori ca în povești, preparate extravagante, un
+                  candy bar delicios, totul într-o atmosferă ca de basm, pentru
+                  ca tu să ai nunta de vis pe care ți-o dorești.
                 </p>
               </div>
             </Col>
             <Col className='col-lg-6'>
-              <img className='img-fluid' src={WeddingImg} alt='Nunta' />
+              <img className='img-fluid offer' src={WeddingImg} alt='Nunta' />
             </Col>
           </Row>
 
@@ -70,12 +58,12 @@ class Wedding extends Component {
                 <li className='list-group-item'> +10% taxa servicii</li>
               </ul>
               <div className='panel-footer'>
-                <a className='btn btn-lg btn-block' href='#'>
+                <Button className='btn-block buton' href='/reservation'>
                   Rezerva!
-                </a>
+                </Button>
               </div>
             </Col>
-            <Col className="col-md-4 col-sm-4 text-center panel panel-pricing'">
+            <Col className='col-md-4 col-sm-4 text-center panel panel-pricing'>
               <div className='panel-heading'>
                 <h3>Nunta Premium</h3>
               </div>
@@ -88,9 +76,9 @@ class Wedding extends Component {
                 <li className='list-group-item'>+10% taxa servicii</li>
               </ul>
               <div className='panel-footer'>
-                <a className='btn btn-lg btn-block' href='#'>
+                <Button className='btn-block buton' href='/reservation'>
                   Rezerva!
-                </a>
+                </Button>
               </div>
             </Col>
             <Col className='col-md-4 col-sm-4 text-center panel panel-pricing'>
@@ -106,9 +94,9 @@ class Wedding extends Component {
                 <li className='list-group-item'> +10% taxa servicii</li>
               </ul>
               <div className='panel-footer'>
-                <a className='btn btn-lg btn-block' href='#'>
+                <Button className='btn-block buton' href='/reservation'>
                   Rezerva!
-                </a>
+                </Button>
               </div>
             </Col>
           </Row>

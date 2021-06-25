@@ -12,6 +12,7 @@ import AboutUs from "./pages/AboutUs";
 import Events from "./pages/Events";
 import Contact from "./pages/Contact";
 import Reservation from "./pages/Reservation";
+import Menu from "./pages/Menu";
 
 import "../assets/styles/style.css";
 
@@ -23,15 +24,6 @@ class Main extends Component {
         <Switch>
           <Route exact path='/'>
             <Home />
-          </Route>
-          <Route path='/cart'>
-            <Cart />
-          </Route>
-          <Route path='/orders'>
-            <Orders />
-          </Route>
-          <Route path='/login'>
-            <Login />
           </Route>
           <Route path='/register'>
             <Register />
@@ -48,6 +40,19 @@ class Main extends Component {
           <Route path='/reservation'>
             <Reservation />
           </Route>
+          <Route path='/menu'>
+            <Menu />
+          </Route>
+          <Route path='/cart'>
+            <Cart />
+          </Route>
+          <Route path='/orders'>
+            <Orders />
+          </Route>
+          <Route path='/login'>
+            <Login />
+          </Route>
+
           <Redirect to='/' />
         </Switch>
       </Fragment>

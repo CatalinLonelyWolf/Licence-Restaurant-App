@@ -37,7 +37,7 @@
 }
 .gallery-grid img {
   width: 100%;
-  border: 5px solid #fff;
+  border: 3px solid #fff;
 }
 
 .gallery-grid div {
@@ -102,7 +102,7 @@
 
 .modal img {
   width: 100%;
-  border: 5px solid #fff;
+  border: 3px solid #fff;
 }
 
 /* .modal-overlay {

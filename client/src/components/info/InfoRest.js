@@ -13,9 +13,9 @@ class InfoRest extends Component {
             <Row>
               <Col className='col-lg-6 col-md-6 col-sm-12 text-center'>
                 <h1>
-                  Welcome To <span> Food 4 Fun Restaurant</span>
+                  Bine ati venit la <span> Food 4 Fun Restaurant</span>
                 </h1>
-                <h4>Little Big Story</h4>
+                <h4>"Little Big Story" despre noi</h4>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   Pellentesque auctor suscipit feugiat. Ut at pellentesque ante,
@@ -28,10 +28,16 @@ class InfoRest extends Component {
                   a. Nulla placerat elit in justo vestibulum, et maximus sem
                   pulvinar.
                 </p>
-                <Button>Reservation</Button>
+                <Button className='buton' href='/about-us'>
+                  Despre noi
+                </Button>
               </Col>
               <Col className='col-lg-6 col-md-6 col-sm-1'>
-                <img className='img-fluid' src={InfoRestaurant} />
+                <img
+                  className='img-fluid'
+                  src={InfoRestaurant}
+                  alt='Deschis 24/7, aproape'
+                />
               </Col>
             </Row>
           </Container>

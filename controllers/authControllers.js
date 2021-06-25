@@ -47,9 +47,10 @@ module.exports.signup = (req, res) => {
                 res.json({
                   token,
                   user: {
-                    id: user._id,
+                    _id: user._id,
                     name: user.name,
                     email: user.email,
+                    address: user.address,
                     role: user.role,
                   },
                 });
@@ -87,11 +88,11 @@ module.exports.login = async (req, res) => {
           res.json({
             token,
             user: {
-              id: user._id,
+              _id: user._id,
               name: user.name,
               email: user.email,
               address: user.address,
-              role: user.role
+              role: user.role,
             },
           });
         }

@@ -21,7 +21,7 @@ class EditItem extends Component {
   render() {
     return (
       <Fragment>
-        <Button color='warning' size='sm' onClick={this.toggleModal}>
+        <Button color='primary' size='md' onClick={this.toggleModal}>
           Edit
         </Button>
         <MealModal

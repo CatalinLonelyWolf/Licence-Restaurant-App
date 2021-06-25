@@ -4,17 +4,22 @@ import Wedding from "../events/Wedding";
 import Baptism from "../events/Baptism";
 import Party from "../events/Party";
 import Footer from "../Footer";
+/* import ContactInfo from "../contactInfo/ContactInfo"; */
+
+import "../events/style.css";
 
 class Events extends Component {
   render() {
     return (
       <Fragment>
-        <Jumbotron>
-          <h1 className='display-4'>
-            Esti pregatit pentru cea mai tare experienta din viata ta?
-          </h1>
+        <Jumbotron className='jumbo bg-f'>
+          <h1 className='display-4'>Evenimente pentru tine</h1>
         </Jumbotron>
-        <Wedding />, <Baptism />, <Party />, <Footer />
+        <Wedding />
+        <Baptism />
+        <Party />
+        {/* <ContactInfo />, */}
+        <Footer />
       </Fragment>
     );
   }

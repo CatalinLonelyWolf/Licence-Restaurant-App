@@ -44,7 +44,7 @@ class ContactForm extends Component {
     e.preventDefault();
 
     this.setState({
-      msg: "Thank you for your message. Please expect a response from us as soon as possible.",
+      msg: "Va multumim pentru mesajul / sugestia dumneavoastra. Vom reveni cu un raspuns cat mai repede posibil.",
     });
     window.setTimeout(() => {
       this.setState({ msg: null });
@@ -54,97 +54,98 @@ class ContactForm extends Component {
   render() {
     return (
       <Fragment>
-        <Container className='contact-box'>
-          <h2>Contact</h2>
-          <p>If you want to send us a message or some suggestions</p>
-        </Container>
+        <div className='contactBg'>
+          <Container className='contact-box'>
+            <h2>Pentru sugestii si feedback</h2>
+          </Container>
 
-        <Container>
-          {this.state.msg ? (
-            <Alert color='success'>{this.state.msg}</Alert>
-          ) : null}
-          <Form className='contact-form' onSubmit={this.onSubmit}>
-            <Row>
-              <FormGroup className='form-group mx-auto col-md-6 col-lg-6'>
-                <Label for='firstName'>First Name</Label>
-                <Input
-                  type='text'
-                  name='firstName'
-                  id='firstName'
-                  placeholder='First name'
-                  required
-                />
+          <Container>
+            {this.state.msg ? (
+              <Alert color='success'>{this.state.msg}</Alert>
+            ) : null}
+            <Form className='contact-form' onSubmit={this.onSubmit}>
+              <Row>
+                <FormGroup className='form-group mx-auto col-md-6 col-lg-6'>
+                  <Label for='firstName'>Nume</Label>
+                  <Input
+                    type='text'
+                    name='firstName'
+                    id='firstName'
+                    placeholder='Nume'
+                    required
+                  />
+                </FormGroup>
+                <FormGroup className='form-group mx-auto col-md-6 col-lg-6'>
+                  <Label for='lastName'>Prenume</Label>
+                  <Input
+                    type='text'
+                    name='lastName'
+                    id='lastName'
+                    placeholder='Prenume'
+                    required
+                  />
+                </FormGroup>
+              </Row>
+              <Row>
+                <FormGroup className='form-group mx-auto col-md-6 col-lg-6 '>
+                  <Label for='email'>Email</Label>
+                  <Input
+                    type='email'
+                    name='email'
+                    id='email'
+                    placeholder='Email'
+                    required
+                  />
+                </FormGroup>
+                <FormGroup className='form-group mx-auto col-md-6 col-lg-6 '>
+                  <Label for='phone'>Telefon</Label>
+                  <Input
+                    type='number'
+                    name='phone'
+                    id='phone'
+                    pattern='[0-9]{3}'
+                    placeholder='Numarul de telefon'
+                    required
+                  />
+                </FormGroup>
+              </Row>
+              <FormGroup className='form-group mx-auto col-md-14 col-lg-14 '>
+                <FormGroup>
+                  <Label for='textMessage'>
+                    Mesajul / sugestia dumneavoastra
+                  </Label>
+                  <Input
+                    type='textarea'
+                    name='text'
+                    id='textMessage'
+                    placeholder='Aici puteti lasa mesajul sau sugestia dumneavoastra!'
+                    required
+                  />
+                </FormGroup>
               </FormGroup>
-              <FormGroup className='form-group mx-auto col-md-6 col-lg-6'>
-                <Label for='lastName'>Last Name</Label>
-                <Input
-                  type='text'
-                  name='lastName'
-                  id='lastName'
-                  placeholder='Last name'
-                  required
+              <Button className='buton mb-4' type='submit'>
+                Trimite mesaj
+              </Button>
+            </Form>
+          </Container>
+          <Container>
+            <div style={{ height: "400px", width: "100%" }}>
+              <GoogleMapReact
+                bootstrapURLKeys={{
+                  key: "AIzaSyAubPRTu3uyohnax2Iq90EIEnReerLyeAI",
+                }}
+                defaultCenter={this.props.center}
+                defaultZoom={this.props.zoom}
+              >
+                <LocationPin
+                  lat={this.props.pin.lat}
+                  lng={this.props.pin.lng}
+                  text={this.props.address}
                 />
-              </FormGroup>
-            </Row>
-            <Row>
-              <FormGroup className='form-group mx-auto col-md-6 col-lg-6 '>
-                <Label for='email'>Email</Label>
-                <Input
-                  type='email'
-                  name='email'
-                  id='email'
-                  placeholder='Please enter your e-mail'
-                  required
-                />
-              </FormGroup>
-              <FormGroup className='form-group mx-auto col-md-6 col-lg-6 '>
-                <Label for='phone'>Phone</Label>
-                <Input
-                  type='number'
-                  name='phone'
-                  id='phone'
-                  placeholder='Phone number'
-                  required
-                />
-              </FormGroup>
-            </Row>
-            <FormGroup className='form-group mx-auto col-md-14 col-lg-14 '>
-              <FormGroup>
-                <Label for='textMessage'>
-                  You can leave a message or suggestion here
-                </Label>
-                <Input
-                  type='textarea'
-                  name='text'
-                  id='textMessage'
-                  pattern='[0-9]{3}'
-                  placeholder='Please enter your message / suggestion'
-                  required
-                />
-              </FormGroup>
-            </FormGroup>
-            <Button color='success' type='submit'>
-              Send message
-            </Button>
-          </Form>
-        </Container>
-        <Container>
-          <div style={{ height: "400px", width: "100%" }}>
-            <GoogleMapReact
-              bootstrapURLKeys={{
-                key: "AIzaSyAubPRTu3uyohnax2Iq90EIEnReerLyeAI",
-              }}
-              defaultCenter={this.props.center}
-              defaultZoom={this.props.zoom}
-            >
-              <LocationPin
-                lat={this.props.pin.lat}
-                lng={this.props.pin.lng}
-                text={this.props.address}
-              />
-            </GoogleMapReact>
-          </div>
-        </Container>
+              </GoogleMapReact>
+            </div>
+          </Container>
+        </div>
       </Fragment>
     );
   }

@@ -1,15 +1,15 @@
 import React, { Component, Fragment } from "react";
-import { Button } from 'reactstrap';
+import { Button } from "reactstrap";
 import { connect } from "react-redux";
 
 import MealModal from "./mealModal";
 
 class AddItem extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      show: false
-    }
+      show: false,
+    };
     this.toggleModal = this.toggleModal.bind(this);
   }
 
@@ -23,16 +23,16 @@ class AddItem extends Component {
     const { user } = this.props.auth;
     if (user && user.role === 1) {
       return (
-          <Fragment>
-            <Button color='primary' onClick={this.toggleModal}>
-              Add Meal
-            </Button>  
-            <MealModal 
-              type="add"
-              show={this.state.show} 
-              onToggleModal={this.toggleModal}
-            />
-          </Fragment>
+        <Fragment>
+          <Button color='primary' className='buton' onClick={this.toggleModal}>
+            Adauga produs
+          </Button>
+          <MealModal
+            type='add'
+            show={this.state.show}
+            onToggleModal={this.toggleModal}
+          />
+        </Fragment>
       );
     }
     return null;

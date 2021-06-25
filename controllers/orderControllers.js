@@ -21,15 +21,15 @@ module.exports.checkout = async (req, res) => {
     }
     let cart = await Cart.findOne({ userId });
     let user = await User.findOne({ _id: userId });
-    const email = user.email;
+    // const email = user.email;
     const deliveryFee = process.env.DELIVERY_FEE;
     if (cart) {
       if (takeaway) cart.order_total += deliveryFee;
       const charge = await stripe.charges.create({
-        amount: cart.order_total,
+        amount: cart.order_total * 100,
         currency: "ron",
         source: source,
-        receipt_email: email,
+        // receipt_email: email,
       });
       if (!charge) throw Error("Payment failed");
       if (charge) {

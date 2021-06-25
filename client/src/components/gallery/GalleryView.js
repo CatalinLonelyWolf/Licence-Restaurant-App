@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 /* import { render } from "react-dom"; */
 /* import { Carousel, Modal } from "reactstrap";
 import { Gallery, ModalGateway } from "react-bootstrap"; */
@@ -22,7 +22,7 @@ class GalleryView extends React.Component {
   renderImageContent(src, index) {
     return (
       <div onClick={(e) => this.openModal(e, index)} key={index}>
-        <img src={src} key={src} alt=""/>
+        <img src={src} key={src} alt='' />
       </div>
     );
   }
@@ -55,10 +55,19 @@ class GalleryView extends React.Component {
       currentIndex: prevState.currentIndex + 1,
     }));
   }
-  
+
   render() {
     return (
       <Container className='gallery-container'>
+        <Row>
+          <Col className='col-lg-12 heading-title text-center'>
+            <h2>Cele mai bune preparate</h2>
+            <p>
+              Aceste imagini prezinta capodoperele realizate de bucatarii
+              nostri!
+            </p>
+          </Col>
+        </Row>
         <div className='gallery-grid'>
           {imgUrls.map(this.renderImageContent)}
         </div>

@@ -14,11 +14,12 @@ import { connect } from "react-redux";
 import { getItems, deleteItem, updateItem } from "../actions/itemActions";
 import { addToCart } from "../actions/cartActions";
 import AddItem from "./AddItem"; */
-import AdminDashboard from "./AdminDashboard";
+/* import Menu from "./Menu"; */
 import CarouselImg from "../carousel/CarouselImg";
 import InfoRest from "../info/InfoRest";
 import Banner from "../bannerQT/Banner";
-import Review from "../review/Review";
+import Reviews from "../reviews/Reviews";
+import ContactInfo from "../contactInfo/ContactInfo";
 import Footer from "../Footer";
 
 class Home extends Component {
@@ -76,8 +77,9 @@ class Home extends Component {
         <CarouselImg />
         <InfoRest />
         <Banner />
-        <AdminDashboard />
-        <Review />
+        {/* <Menu /> */}
+        <Reviews />
+        <ContactInfo />
         <Footer />
       </Fragment>
       /*  <Container>

@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import Carousel from "react-bootstrap/Carousel";
-import { Button, Row } from "reactstrap";
+import { Container, Button, Row, Col } from "reactstrap";
+/* import { Link } from "react-router-dom"; */
 
 import Rest1 from "../../assets/images/slider-01.jpg";
 import Rest2 from "../../assets/images/slider-02.jpg";
@@ -11,39 +12,84 @@ import "./style.css";
 class CarouselImg extends Component {
   render() {
     return (
-      <Carousel fade>
-        <Carousel.Item>
-          <img className='d-block w-100' src={Rest1} alt='First slide' />
-          <Row>
-            <Carousel.Caption className='about'>
-              <h3>Cine suntem si ce facem? </h3>
-              <p>Va aratam imediat!</p>
-              <Button>About Us</Button>
-            </Carousel.Caption>
-          </Row>
-        </Carousel.Item>
+      <Fragment>
+        <Carousel fade>
+          <Carousel.Item>
+            <Container className='item-container' fluid={true}>
+              <Row>
+                <Col>
+                  <img src={Rest2} alt='First slide' />
+                </Col>
 
-        <Carousel.Item>
-          <img className='d-block w-100 ' src={Rest2} alt='Second slide' />
-          <Carousel.Caption className='reservation'>
-            <h3>Vrei sa nu mai stai la coada? </h3>
-            <p>Poti face o reservare rapid si usor!</p>
-            <Button>Reservations</Button>
-          </Carousel.Caption>
-        </Carousel.Item>
+                <Col>
+                  <Carousel.Caption>
+                    <h2>Hai sa ne cunoastem mai bine!</h2>
+                    <Button className='buton' href='/about-us'>
+                      Despre noi{" "}
+                    </Button>
+                  </Carousel.Caption>
+                </Col>
+              </Row>
+            </Container>
+          </Carousel.Item>
+          <Carousel.Item>
+            <Container className='item-container' fluid={true}>
+              <Row>
+                <Col>
+                  <img src={Rest1} alt='First slide' />
+                </Col>
 
-        <Carousel.Item>
-          <img className='d-block w-100' src={Rest3} alt='Third slide' />
-          <Carousel.Caption className='offer'>
-            <h3>Vrei sa te rasfeti? </h3>
-            <p>
-              Esti doar la un click distanta de cea mai buna experienta
-              culinara!
-            </p>
-            <Button>Menu</Button>
-          </Carousel.Caption>
-        </Carousel.Item>
-      </Carousel>
+                <Col>
+                  <Carousel.Caption>
+                    <h2>Vrei sa planifici un eveniment?</h2>
+                    <Button className='buton' href='/reservation'>
+                      Rezervari{" "}
+                    </Button>
+                  </Carousel.Caption>
+                </Col>
+              </Row>
+            </Container>
+          </Carousel.Item>
+
+          <Carousel.Item>
+            <Container className='item-container' fluid={true}>
+              <Row>
+                <Col>
+                  <img src={Rest3} alt='First slide' />
+                </Col>
+
+                <Col>
+                  <Carousel.Caption>
+                    <h2>De ce ai pofta noi iti putem oferi!</h2>
+                    <Button className='buton' href='/menu'>
+                      Meniu{" "}
+                    </Button>
+                  </Carousel.Caption>
+                </Col>
+              </Row>
+            </Container>
+          </Carousel.Item>
+
+          {/* <Carousel.Item>
+              <img className='d-block' src={Rest2} alt='Second slide' />
+              <Carousel.Caption className='d-block caption-wrap'></Carousel.Caption>
+            </Carousel.Item>
+
+            <Carousel.Item>
+              <img className='d-block' src={Rest3} alt='Third slide' />
+              <Carousel.Caption className='d-block caption-wrap'></Carousel.Caption>
+            </Carousel.Item> */}
+        </Carousel>
+
+        {/* <Container className='col-md-5 col-lg-5 info'>
+            <h1>Poate nu cel mai bun, dar cel mai gustos restaurant</h1>
+            { <p>Nu crezi? Incearca!</p>}
+            <Button className='buton' href='/menu'>
+              {" "}
+              Menu
+            </Button>
+          </Container> */}
+      </Fragment>
     );
   }
 }

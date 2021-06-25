@@ -1,46 +1,65 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import {
   Container,
   Row,
-  Col,
   Button,
   Form,
   FormGroup,
   Label,
   Input,
+  Alert,
 } from "reactstrap";
 
 import "./style.css";
 
 class ReservationForm extends Component {
+  state = {
+    msg: null,
+  };
+
+  onSubmit = (e) => {
+    e.preventDefault();
+
+    this.setState({
+      msg: "Va multumim pentru rezervarea dumneavoastra. Vom reveni cu un raspuns cat mai repede posibil!",
+    });
+    window.setTimeout(() => {
+      this.setState({ msg: null });
+    }, 3000);
+  };
+
   render() {
     return [
-      <Fragment>
-        <Container className='contact-box'>
-          <h2>Reservation</h2>
-          <p>If you want to join us on a spectacular event</p>
-        </Container>
+      <div className='reservationBg'>
+        {
+          <Container className='contact-box'>
+            <h2>Pentru orice rezervare esti la un pas</h2>
+          </Container>
+        }
 
-        <Container>
-          <Form className='contact-form'>
+        <Container className='contact-box'>
+          {this.state.msg ? (
+            <Alert color='success'>{this.state.msg}</Alert>
+          ) : null}
+          <Form className='contact-form' onSubmit={this.onSubmit}>
             <Row>
               <FormGroup className='form-group mx-auto col-md-6 col-lg-6'>
-                <Label for='firstName'>First Name</Label>
+                <Label for='firstName'>Nume</Label>
                 <Input
                   type='text'
                   name='firstName'
                   id='firstName'
-                  placeholder='First name'
+                  placeholder='Nume'
                   required
                 />
               </FormGroup>
               <FormGroup className='form-group mx-auto col-md-6 col-lg-6'>
-                <Label for='lastName'>Last Name</Label>
+                <Label for='lastName'>Prenume</Label>
                 <Input
                   type='text'
                   name='lastName'
                   id='lastName'
-                  placeholder='Last name'
+                  placeholder='Prenume'
                   required
                 />
               </FormGroup>
@@ -52,42 +71,35 @@ class ReservationForm extends Component {
                   type='email'
                   name='email'
                   id='email'
-                  placeholder='Please enter your e-mail'
+                  placeholder='Email'
                   required
                 />
               </FormGroup>
               <FormGroup className='form-group mx-auto col-md-6 col-lg-6 '>
-                <Label for='phone'>Phone</Label>
+                <Label for='phone'>Telefon</Label>
                 <Input
                   type='number'
                   name='phone'
                   id='phone'
                   pattern='[0-9]{3}'
-                  placeholder='Phone number'
+                  placeholder='Numarul de telefon'
                   required
                 />
               </FormGroup>
             </Row>
             <Row>
-              <FormGroup className='form-group mx-auto col-md-4 col-lg-4 '>
-                <Label for='events'>Select event</Label>
+              <FormGroup className='form-group mx-auto col-md-6 col-lg-6 '>
+                <Label for='events'>Selecteaza evenimentul</Label>
                 <Input type='select'>
-                  <option>Wedding</option>
-                  <option>Baptism</option>
-                  <option>Social Party</option>
+                  <option>Nunta</option>
+                  <option>Botez</option>
+                  <option>Eveniment special</option>
                 </Input>
               </FormGroup>
-              <FormGroup className='form-group mx-auto col-md-4 col-lg-4 '>
-                <Label for='date'>Date</Label>
-                <Input
-                  type='date'
-                  name='date'
-                  id='exampleDate'
-                  placeholder='date placeholder'
-                />
-              </FormGroup>
-              <FormGroup className='form-group mx-auto col-md-4 col-lg-4 '>
-                <Label for='numberOfPeople'>Select no. of people</Label>
+              <FormGroup className='form-group mx-auto col-md-6 col-lg-6 '>
+                <Label for='numberOfPeople'>
+                  Selecteaza numarul de persoane
+                </Label>
                 <Input type='select'>
                   <option>1</option>
                   <option>2</option>
@@ -98,23 +110,55 @@ class ReservationForm extends Component {
               </FormGroup>
             </Row>
             <Row>
+              <FormGroup className='form-group mx-auto col-md-6 col-lg-6 '>
+                <Label for='date'>Data</Label>
+                <Input
+                  type='date'
+                  name='date'
+                  id='exampleDate'
+                  placeholder='date placeholder'
+                />
+              </FormGroup>
+              <FormGroup className='form-group mx-auto col-md-6 col-lg-6 '>
+                <Label for='time'>Ora</Label>
+                <Input type='select'>
+                  <option>7:00</option>
+                  <option>8:00</option>
+                  <option>9:00</option>
+                  <option>10:00</option>
+                  <option>11:00</option>
+                  <option>12:00</option>
+                  <option>13:00</option>
+                  <option>14:00</option>
+                  <option>15:00</option>
+                  <option>16:00</option>
+                  <option>17:00</option>
+                  <option>18:00</option>
+                  <option>19:00</option>
+                  <option>20:00</option>
+                  <option>21:00</option>
+                  <option>22:00</option>
+                </Input>
+              </FormGroup>
+            </Row>
+            <Row>
               <FormGroup className='form-group mx-auto col-md-12 col-lg-12 '>
-                <Label for='textMessage'>Additional Information</Label>
+                <Label for='textMessage'>Informatii aditionale</Label>
                 <Input
                   type='textarea'
                   name='text'
                   id='textMessage'
-                  placeholder='If you want something special please mention it here'
+                  placeholder='Daca doriti ceva special, aici puteti scrie'
                   required
                 />
               </FormGroup>
             </Row>
-            <Button color='success' type='submit'>
-              Sent message
+            <Button className='buton mb-4' type='submit'>
+              Trimite mesaj
             </Button>
           </Form>
         </Container>
-      </Fragment>,
+      </div>,
     ];
   }
 }

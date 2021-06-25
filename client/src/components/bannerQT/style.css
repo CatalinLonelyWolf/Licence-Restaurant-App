@@ -1,7 +1,8 @@
 .qt-background {
   background: url(http://localhost:3000/images/food.jpg) no-repeat;
   background-size: cover;
-  padding: 100px 0;
+  padding-top: 100px;
+  padding-bottom: 100px;
   background-attachment: fixed;
   background-position: center center;
   position: relative;
